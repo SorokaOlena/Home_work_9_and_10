@@ -29,7 +29,7 @@ public class MainPageTest {
 
     @Test
     public void Regestration() {
-      //  Assert.assertTrue(
+       Assert.assertTrue(
                 mainPage.openMainPage()
                         .openLoginWindow()
                         .fillEmailAddress()
@@ -45,14 +45,13 @@ public class MainPageTest {
                         .fillMobilePhone()
                         .fillAddressAlias()
                         .clickRegisterButton()
-                        .checkAlert();
-                 //       .isSizeL());
+                        .isErrorMesage());
     }
 
-//    @After
-//    public void cleanup(){
-//        driver.manage().deleteAllCookies();
-//        driver.close();
-//    }
+   @After
+    public void cleanup(){
+        driver.manage().deleteAllCookies();
+        driver.close();
+    }
 
 }

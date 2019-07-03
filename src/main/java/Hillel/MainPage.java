@@ -16,7 +16,6 @@ import org.openqa.selenium.WebDriver;
         private String city = "Kyiv";
         private String zipCode = "12345";
         private String mobilePhone = "380961234567";
-        private String alert = "There are 2 errors";
 
 
         private By loginButton = By.xpath("//*[@id='header']//a[@class='login'][@title='Log in to your customer account']");
@@ -33,7 +32,7 @@ import org.openqa.selenium.WebDriver;
         private By fieldMobilePhone =By.xpath("//form[@id='account-creation_form']//input[@id='phone_mobile']");
         private By fieldAdressAlias =By.xpath("//form[@id='account-creation_form']//input[@id='alias']");
         private By registerButton =By.xpath("//form[@id='account-creation_form']//button[@id='submitAccount']");
-        private By errorMesage =By.xpath("//*[@id='center_column']/comment()");
+        private By errorMesage =By.xpath("//div[@class='alert alert-danger']//p[contains(text(),'There are 2 errors')]");
 
 
 
@@ -117,15 +116,9 @@ import org.openqa.selenium.WebDriver;
             return this;
         }
 
-        public MainPage checkAlert (){
-            this.driver.findElement(errorMesage).getText("There are 2 errors");
-            return this;
-        }
-
-
-      //  public boolean isSizeL(){
-       //     return this.driver.findElement(sizeLcheckbox).isSelected();
-      //  }
+        public boolean isErrorMesage(){
+           return this.driver.findElement(errorMesage).isDisplayed();
+       }
     }
 
 
