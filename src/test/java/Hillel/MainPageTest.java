@@ -1,57 +1,42 @@
 package Hillel;
 
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import Hillel.pages.MainPage;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+public class MainPageTest extends BaseTest {
 
-public class MainPageTest {
-
-
-    private WebDriver driver;
     private MainPage mainPage;
 
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
-        // win mac linux
-        this.driver = new ChromeDriver();
-        this.driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
-        this.driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
-        this.mainPage = new MainPage(this.driver);
+    @BeforeMethod
+    public void setupMainPage() {
+        mainPage = new MainPage(driver);
     }
 
     @Test
-    public void Regestration() {
-       Assert.assertTrue(
-                mainPage.openMainPage()
-                        .openLoginWindow()
-                        .fillEmailAddress()
-                        .clickCreateAnAccount()
-                        .fillPersonalFirsrName()
-                        .fillPersonalLastName()
-                        .fillPassword()
-                        .fillAddressFirsrName()
-                        .fillAddressLastName()
-                        .fillAddress()
-                        .fillCity()
-                        .fillZipCode()
-                        .fillMobilePhone()
-                        .fillAddressAlias()
-                        .clickRegisterButton()
-                        .isErrorMesage());
-    }
+    public void canCheckTotalPriceForTShirt() {
+        mainPage.fillSearch()
+                .clickSearchButton()
+                .clickListView();
 
-   @After
-    public void cleanup(){
-        driver.manage().deleteAllCookies();
-        driver.close();
-    }
 
+  //      mainPage.clickTShirtTab();
+        mainPage.scrollToItem();
+        mainPage.navigateToItemView();
+        mainPage.clickAddToCart();
+
+        mainPage.clickProceedToCheckout();
+        mainPage.clickAddButton();
+        mainPage.clickProceedToCheckout2();
+
+        String actualResult = mainPage.getTotalPrice();
+  //      String expectedResult = "$18.51";
+        String expectedResult = "$56.00";
+
+       // Assert.assertEquals("Actual result is: " + actualResult + " Expected result is: " + expectedResult, expectedResult, actualResult);
+        Assert.assertEquals( expectedResult, actualResult);
+
+    }
 }
