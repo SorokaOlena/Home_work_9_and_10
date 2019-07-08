@@ -31,12 +31,21 @@ public class MainPageTest extends BaseTest {
         mainPage.clickAddButton();
         mainPage.clickProceedToCheckout2();
 
-        String actualResult = mainPage.getTotalPrice();
-  //      String expectedResult = "$18.51";
-        String expectedResult = "$56.00";
+        String actualResult1 =mainPage.getCardTotal();
+        String expectedResult1 = "$54.00";
 
-       // Assert.assertEquals("Actual result is: " + actualResult + " Expected result is: " + expectedResult, expectedResult, actualResult);
-        Assert.assertEquals( expectedResult, actualResult);
+
+        String actualResult2 = mainPage.getTotalPrice();
+        String expectedResult2 = "$56.00";
+
+
+        Assert.assertEquals( expectedResult1, actualResult1);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Assert.assertEquals( expectedResult2, actualResult2);
 
     }
 }

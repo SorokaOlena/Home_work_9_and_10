@@ -19,7 +19,7 @@ public class MainPage {
     private WebDriver driver;
 
     private final static String TITLE_PROCEED_TO_CHECKOUT = "//*[@title='Proceed to checkout']";
-    private final static String TITLE_PROCEED_TO_CHECKOUT2 = "//*[@id=\"total_price\"]['$56.00']";
+    private final static String TITLE_PROCEED_TO_CHECKOUT2 = "//*[@id=\"total_price\"][contains(text(),'$56.00')]";
 
     @FindBy(xpath = "//header[@id='header']//input[@id='search_query_top']")
     private WebElement searchField;
@@ -33,43 +33,68 @@ public class MainPage {
     @FindBy(xpath = "//*[@class='right-block-content row']")
     private WebElement itemView;
 
-    @FindBy(xpath = "//tr[@class='cart_item last_item first_item address_0 odd']//a[@title='Add']")
-    private WebElement addButton;
-
-
-//***************
-    @FindBy(css = "#block_top_menu > ul > li:nth-child(1) > a")
-    private WebElement womenTab;
-
-    @FindBy(css = "#block_top_menu > ul > li.sfHoverForce > a")
-    private WebElement dressesTab;
-
-    @FindBy(id = "search_query_top")
-    private WebElement search;
-
-    @FindBy(xpath = "//button[@name='submit_search']")
-    private WebElement submitButton;
-//
- //   @FindBy(xpath = "//*[@class='right-block-content row']")
- //   private WebElement itemView;
-//
- //   @FindBy(className = "icon-th-list")
- //   private WebElement listView;
-
     @FindBy(xpath = "//span[text()='Add to cart']")
     private WebElement addCartButton;
+
+    @FindBy(xpath = "//tr[@class='cart_item last_item first_item address_0 odd']//a[@title='Add']")
+    private WebElement addButton;
 
     @FindBy(xpath = TITLE_PROCEED_TO_CHECKOUT)
     private WebElement proceedCheckout;
 
+    @FindBy (xpath = "//span[@id='total_product_price_2_7_0']")
+    private WebElement cardTotal;
+
+    @FindBy (xpath = "//td[@id='total_product']")
+    private WebElement totalProduct;
+
+    @FindBy (xpath = "//td[@id='total_shipping']")
+    private WebElement totalShipping;
+
+    @FindBy (xpath = "//td[@id='total_price_without_tax']")
+    private WebElement totalPriceWithoutTax;
+
+    @FindBy (xpath = "//td[@id='total_tax']")
+    private WebElement tax;
+
     @FindBy(xpath = "//span[@id='total_price']")
     private WebElement totalSum;
 
-    @FindBy(xpath = "//*[contains(@href,'controller=my-account')]")
-    private WebElement singIn;
-
-    @FindBy(xpath = "//*[@title='Contact Us']")
-    private WebElement contactUs;
+//***************
+//    закоментувала
+//    @FindBy(css = "#block_top_menu > ul > li:nth-child(1) > a")
+//    private WebElement womenTab;
+//
+//    @FindBy(css = "#block_top_menu > ul > li.sfHoverForce > a")
+//    private WebElement dressesTab;
+//
+//    @FindBy(id = "search_query_top")
+//    private WebElement search;
+//
+//    @FindBy(xpath = "//button[@name='submit_search']")
+//    private WebElement submitButton;
+//
+//
+//
+//
+//
+//    @FindBy(xpath = "//span[text()='Add to cart']")
+//    private WebElement addCartButton;
+//
+//    @FindBy(xpath = TITLE_PROCEED_TO_CHECKOUT)
+//    private WebElement proceedCheckout;
+//
+//    @FindBy(xpath = "//span[@id='total_price']")
+//    private WebElement totalSum;
+//
+//
+//
+//
+//    @FindBy(xpath = "//*[contains(@href,'controller=my-account')]")
+//    private WebElement singIn;
+//
+//    @FindBy(xpath = "//*[@title='Contact Us']")
+//    private WebElement contactUs;
 // --------------------------------------------------------------------------
 ///    private By tshirtsTab = By.xpath("//*[@id='block_top_menu']/ul/li[3]/a");
 //    private By sizeLcheckbox = By.id("layered_id_attribute_group_3");
@@ -124,50 +149,9 @@ public class MainPage {
         return this;
     }
 
-
-    /////**********
-    public MainPage selectSizeL(){
-        sizeLcheckbox.click();
-        return this;
-    }
-
-
-
-
-
-    public MainPage openTShirtTab() {
-        tShirtTab.click();
-        return this;
-    }
-    // --------------------------------------------------------------------------
-
-    public MainPage clickWomenTab() {
-        womenTab.click();
-        return this;
-    }
-
-    public MainPage clickDressesTab() {
-        dressesTab.click();
-        return this;
-    }
-
-    public MainPage clickTShirtTab() {
-        tShirtTab.click();
-        return this;
-    }
-
-    //    public SignInPage clickSignIn(){
-//        singIn.click();
-//        return new SignInPage(driver);
-//    }
     public void clickAddToCart(){
         addCartButton.click();
     }
-
-//    public void navigateToItemView () {
-//        Actions actions = new Actions(driver);
-//        actions.moveToElement(itemView).build().perform();
-//    }
 
     public void scrollToItem(){
         JavascriptExecutor executor = (JavascriptExecutor)driver;
@@ -183,6 +167,10 @@ public class MainPage {
         new WebDriverWait(driver, 10).
                 until(ExpectedConditions.visibilityOfElementLocated(By.
                         xpath(TITLE_PROCEED_TO_CHECKOUT2))).getText();
+    }
+
+    public String getCardTotal (){
+        return cardTotal.getText();
     }
 
     public String getTotalPrice(){
