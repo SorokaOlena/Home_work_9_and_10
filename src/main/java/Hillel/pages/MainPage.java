@@ -20,6 +20,7 @@ public class MainPage {
 
     private final static String TITLE_PROCEED_TO_CHECKOUT = "//*[@title='Proceed to checkout']";
     private final static String TITLE_PROCEED_TO_CHECKOUT2 = "//*[@id=\"total_price\"][contains(text(),'$56.00')]";
+    private final static String TITLE_PROCEED_TO_CHECKOUT3 = "//p[@class='alert alert-warning'][contains(text(),'Your shopping cart is empty.')]";
 
     @FindBy(xpath = "//header[@id='header']//input[@id='search_query_top']")
     private WebElement searchField;
@@ -59,6 +60,9 @@ public class MainPage {
 
     @FindBy(xpath = "//span[@id='total_price']")
     private WebElement totalSum;
+
+    @FindBy(xpath = "//a[@title=\"Delete\"]")
+    private WebElement deletebutton;
 
 //***************
 //    закоментувала
@@ -144,20 +148,21 @@ public class MainPage {
         return this;
     }
 
-    public MainPage clickAddButton(){
+    public void clickAddButton(){
         addButton.click();
-        return this;
     }
 
     public void clickAddToCart(){
         addCartButton.click();
     }
 
+
     public void scrollToItem(){
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("arguments[0].scrollIntoView(true);", itemView);
     }
     public void clickProceedToCheckout() {
+
         new WebDriverWait(driver, 10).
                 until(ExpectedConditions.visibilityOfElementLocated(By.
                         xpath(TITLE_PROCEED_TO_CHECKOUT))).click();
@@ -170,10 +175,41 @@ public class MainPage {
     }
 
     public String getCardTotal (){
+
         return cardTotal.getText();
     }
+    public String getTotalProduct (){
+        return totalProduct.getText();
+    }
+    public String getTotalShipping(){
+        return totalShipping.getText();
+    }
+    public String getTotalPriceWithoutTax(){
+        return totalPriceWithoutTax.getText();
+    }
 
+    public String getTax(){
+        return tax.getText();
+    }
     public String getTotalPrice(){
+
         return totalSum.getText();
     }
-}
+
+    public void clickDeleteButton(){
+        deletebutton.click();
+    }
+
+    public  void clickProceedToCheckout3(){
+        new WebDriverWait(driver, 10).
+                until(ExpectedConditions.visibilityOfElementLocated(By.xpath(TITLE_PROCEED_TO_CHECKOUT3))).getText();
+    }
+
+
+    public boolean isErrorMesage(){
+        return this.driver.findElement(By.xpath(TITLE_PROCEED_TO_CHECKOUT3)).isDisplayed();
+    }
+
+    }
+
+
