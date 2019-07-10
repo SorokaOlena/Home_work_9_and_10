@@ -22,16 +22,16 @@ public abstract class BaseTest {
     public void setup(){
         driver = WebDriverFactory.getDriver(DriverType.CHROME);
         driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(config.getProperty("baseurl"));
     }
 
 
-//    @AfterMethod
-    //   public void cleanup() {
-    //      driver.manage().deleteAllCookies();
-    //      TestHelper.sleep5Seconds();
-    //       driver.close();
-    //  }
+    @AfterMethod
+       public void cleanup() {
+          driver.manage().deleteAllCookies();
+          TestHelper.sleep5Seconds();
+           driver.close();
+      }
 }

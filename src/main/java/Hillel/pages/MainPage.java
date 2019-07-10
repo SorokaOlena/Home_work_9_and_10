@@ -64,59 +64,6 @@ public class MainPage {
     @FindBy(xpath = "//a[@title=\"Delete\"]")
     private WebElement deletebutton;
 
-//***************
-//    закоментувала
-//    @FindBy(css = "#block_top_menu > ul > li:nth-child(1) > a")
-//    private WebElement womenTab;
-//
-//    @FindBy(css = "#block_top_menu > ul > li.sfHoverForce > a")
-//    private WebElement dressesTab;
-//
-//    @FindBy(id = "search_query_top")
-//    private WebElement search;
-//
-//    @FindBy(xpath = "//button[@name='submit_search']")
-//    private WebElement submitButton;
-//
-//
-//
-//
-//
-//    @FindBy(xpath = "//span[text()='Add to cart']")
-//    private WebElement addCartButton;
-//
-//    @FindBy(xpath = TITLE_PROCEED_TO_CHECKOUT)
-//    private WebElement proceedCheckout;
-//
-//    @FindBy(xpath = "//span[@id='total_price']")
-//    private WebElement totalSum;
-//
-//
-//
-//
-//    @FindBy(xpath = "//*[contains(@href,'controller=my-account')]")
-//    private WebElement singIn;
-//
-//    @FindBy(xpath = "//*[@title='Contact Us']")
-//    private WebElement contactUs;
-// --------------------------------------------------------------------------
-///    private By tshirtsTab = By.xpath("//*[@id='block_top_menu']/ul/li[3]/a");
-//    private By sizeLcheckbox = By.id("layered_id_attribute_group_3");
-//
-//    public MainPage(WebDriver driver) {
-//        this.driver = driver;
-//    }
-//
-//    public MainPage openTShirtTab(){
-//        this.driver.findElement(tshirtsTab).click();
-//        return this;
-//    }
-//
-//    public MainPage selectSizeL(){
-//        this.driver.findElement(sizeLcheckbox).click();
-//        return this;
-//    }
-
     @FindBy(css = "#block_top_menu > ul > li:nth-child(3) > a")
     @CacheLookup
     private WebElement tShirtTab;
@@ -157,12 +104,11 @@ public class MainPage {
     }
 
 
-    public void scrollToItem(){
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].scrollIntoView(true);", itemView);
-    }
+//    public void scrollToItem(){
+//        JavascriptExecutor executor = (JavascriptExecutor)driver;
+//        executor.executeScript("arguments[0].scrollIntoView(true);", itemView);
+//    }
     public void clickProceedToCheckout() {
-
         new WebDriverWait(driver, 10).
                 until(ExpectedConditions.visibilityOfElementLocated(By.
                         xpath(TITLE_PROCEED_TO_CHECKOUT))).click();
@@ -174,10 +120,7 @@ public class MainPage {
                         xpath(TITLE_PROCEED_TO_CHECKOUT2))).getText();
     }
 
-    public String getCardTotal (){
-
-        return cardTotal.getText();
-    }
+    public String getCardTotal (){ return cardTotal.getText(); }
     public String getTotalProduct (){
         return totalProduct.getText();
     }
@@ -187,14 +130,10 @@ public class MainPage {
     public String getTotalPriceWithoutTax(){
         return totalPriceWithoutTax.getText();
     }
-
     public String getTax(){
         return tax.getText();
     }
-    public String getTotalPrice(){
-
-        return totalSum.getText();
-    }
+    public String getTotalPrice(){ return totalSum.getText();}
 
     public void clickDeleteButton(){
         deletebutton.click();
