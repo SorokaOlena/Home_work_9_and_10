@@ -29,9 +29,9 @@ public abstract class BaseTest {
 
 
     @AfterMethod
-       public void cleanup() {
-          driver.manage().deleteAllCookies();
-          TestHelper.sleep5Seconds();
-           driver.close();
-      }
+    public void cleanup() {
+        driver.manage().deleteAllCookies();
+        TestHelper.sleep5Seconds();
+        driver.close();
+    }
 }

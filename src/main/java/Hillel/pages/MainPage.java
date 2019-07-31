@@ -1,3 +1,4 @@
+
 package Hillel.pages;
 
 import org.openqa.selenium.By;
@@ -13,7 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage {
 
-    private String item ="Blouse";
+  //  private String item ="Blouse";
+
 
 
     private WebDriver driver;
@@ -37,7 +39,7 @@ public class MainPage {
     @FindBy(xpath = "//span[text()='Add to cart']")
     private WebElement addCartButton;
 
-    @FindBy(xpath = "//tr[@class='cart_item last_item first_item address_0 odd']//a[@title='Add']")
+    @FindBy(xpath = "//div[@id='order-detail-content']//a[@title='Add']")
     private WebElement addButton;
 
     @FindBy(xpath = TITLE_PROCEED_TO_CHECKOUT)
@@ -75,8 +77,8 @@ public class MainPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-    public MainPage fillSearch(){
-        searchField.sendKeys(item);
+    public MainPage fillSearch(String text){
+        searchField.sendKeys(text);
         return this;
     }
 
@@ -95,29 +97,33 @@ public class MainPage {
         return this;
     }
 
-    public void clickAddButton(){
+    public MainPage clickAddButton(){
         addButton.click();
+        return this;
     }
 
-    public void clickAddToCart(){
+    public MainPage clickAddToCart(){
         addCartButton.click();
+        return this;
     }
 
 
-//    public void scrollToItem(){
+    //    public void scrollToItem(){
 //        JavascriptExecutor executor = (JavascriptExecutor)driver;
 //        executor.executeScript("arguments[0].scrollIntoView(true);", itemView);
 //    }
-    public void clickProceedToCheckout() {
+    public MainPage clickProceedToCheckout() {
         new WebDriverWait(driver, 10).
                 until(ExpectedConditions.visibilityOfElementLocated(By.
                         xpath(TITLE_PROCEED_TO_CHECKOUT))).click();
+        return this;
     }
 
-    public void clickProceedToCheckout2() {
+    public MainPage clickProceedToCheckout2() {
         new WebDriverWait(driver, 10).
                 until(ExpectedConditions.visibilityOfElementLocated(By.
                         xpath(TITLE_PROCEED_TO_CHECKOUT2))).getText();
+        return this;
     }
 
     public String getCardTotal (){ return cardTotal.getText(); }
@@ -139,9 +145,10 @@ public class MainPage {
         deletebutton.click();
     }
 
-    public  void clickProceedToCheckout3(){
+    public MainPage toCheckoutDeletedProduct(){
         new WebDriverWait(driver, 10).
                 until(ExpectedConditions.visibilityOfElementLocated(By.xpath(TITLE_PROCEED_TO_CHECKOUT3))).getText();
+        return this;
     }
 
 
@@ -149,6 +156,4 @@ public class MainPage {
         return this.driver.findElement(By.xpath(TITLE_PROCEED_TO_CHECKOUT3)).isDisplayed();
     }
 
-    }
-
-
+}
