@@ -1,15 +1,19 @@
 package Hillel;
 
 
-import Hillel.BaseTest;
 import Hillel.pages.MainPage;
 import Hillel.utils.TestHelper;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import Hillel.pages.EmptyCardPage;
 
 public class MainPageTest extends BaseTest {
 
     private MainPage mainPage;
+    private EmptyCardPage emptyCardPage;
+
 
     @BeforeMethod
     public void setupMainPage() {
@@ -22,48 +26,85 @@ public class MainPageTest extends BaseTest {
                 .clickAddButton()
                 .clickProceedToCheckout2();
     }
+
     @Test
-    public void testGetCardTotal () {
+    public void testGetCardTotal() {
         String actualResult1 = mainPage.getCardTotal();
         String expectedResult1 = "$54.00";
         Assert.assertEquals(expectedResult1, actualResult1, "getCardTotal");
     }
+
     @Test
-    public void testGetTotalProduct () {
+    public void testGetTotalProduct() {
         String expectedResult1 = "$54.00";
         String actualResult2 = mainPage.getTotalProduct();
         Assert.assertEquals(expectedResult1, actualResult2, "getTotalProduct");
     }
+
     @Test
-    public void testGetTotalShipping () {
+    public void testGetTotalShipping() {
         String actualResult3 = mainPage.getTotalShipping();
         String expectedResult3 = "$2.00";
         Assert.assertEquals(expectedResult3, actualResult3, "getTotalShipping");
     }
+
     @Test
-    public void testGetTotalPriceWithoutTax () {
+    public void testGetTotalPriceWithoutTax() {
         String actualResult4 = mainPage.getTotalPriceWithoutTax();
         String expectedResult4 = "$56.00";
         Assert.assertEquals(expectedResult4, actualResult4, "getTotalPriceWithoutTax");
     }
+
     @Test
-    public void testGetTax () {
+    public void testGetTax() {
         String actualResult5 = mainPage.getTax();
         String expectedResult5 = "$0.00";
         Assert.assertEquals(actualResult5, expectedResult5, "getTax");
     }
 
     @Test
-    public void testGetTotalPrice () {
+    public void testGetTotalPrice() {
         String actualResult6 = mainPage.getTotalPrice();
         String expectedResult4 = "$56.00";
         Assert.assertEquals(expectedResult4, actualResult6, "getTotalPrice");
     }
+
     @Test
-    public void testToCheckoutDeletedProduct () {
-        mainPage.clickDeleteButton();
-        mainPage.toCheckoutDeletedProduct();
+    public void testToCheckoutDeletedProduct() {
+
+
+        Assert.assertTrue(
+
+                emptyCardPage.getCheckoutMessage().contains(
+                        mainPage.clickDeleteButton();
+        //    .toCheckoutDeletedProduct();
+        emptyCardPage.getCheckoutMessage())
+        );
+        //   .isErrorMesage()
+        //     );
     }
+
+}
+
+
+
+
+
+//        String actualResult7 = mainPage.isErrorMesage();
+//        String expectedResult7 = "true";
+//
+////
+//        mainPage.clickDeleteButton();
+//        mainPage.toCheckoutDeletedProduct();
+//        mainPage.isErrorMesage();
+////
+//
+//
+//        Assert.assertEquals(expectedResult7, actualResult7, "isErrorMesage");
+
+//        mainPage.isErrorMesage();
+//        Assert.assertFalse(false);
+
 
     @AfterMethod
     public void cleanup() {

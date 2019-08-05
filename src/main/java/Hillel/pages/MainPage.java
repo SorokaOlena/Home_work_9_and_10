@@ -2,7 +2,6 @@
 package Hillel.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -126,34 +125,50 @@ public class MainPage {
         return this;
     }
 
-    public String getCardTotal (){ return cardTotal.getText(); }
-    public String getTotalProduct (){
+    public String getCardTotal (){
+        return cardTotal.getText(); }
+    public String getTotalProduct ()
+    {
         return totalProduct.getText();
     }
     public String getTotalShipping(){
+
         return totalShipping.getText();
     }
-    public String getTotalPriceWithoutTax(){
+    public String getTotalPriceWithoutTax()
+    {
         return totalPriceWithoutTax.getText();
     }
     public String getTax(){
+
         return tax.getText();
     }
-    public String getTotalPrice(){ return totalSum.getText();}
+    public String getTotalPrice(){
+        return totalSum.getText();}
 
-    public void clickDeleteButton(){
+    public MainPage clickDeleteButton(){
         deletebutton.click();
-    }
-
-    public MainPage toCheckoutDeletedProduct(){
-        new WebDriverWait(driver, 10).
-                until(ExpectedConditions.visibilityOfElementLocated(By.xpath(TITLE_PROCEED_TO_CHECKOUT3))).getText();
         return this;
     }
 
 
-    public boolean isErrorMesage(){
-        return this.driver.findElement(By.xpath(TITLE_PROCEED_TO_CHECKOUT3)).isDisplayed();
+
+//    public MainPage toCheckoutDeletedProduct(){
+//        new WebDriverWait(driver, 10).
+//                until(ExpectedConditions.visibilityOfElementLocated(By.xpath(TITLE_PROCEED_TO_CHECKOUT3)));
+//        return this;
+//    }
+
+
+
+//    public String isErrorMesage(){
+//        this.driver.findElement(By.xpath(TITLE_PROCEED_TO_CHECKOUT3)).isDisplayed();
+//        return this;
+//
+//        public String getAccountName(){
+//            return accountBtn.getText();
+//        }
+
     }
 
-}
+
